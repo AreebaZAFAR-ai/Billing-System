@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-white font-sans text-ink-900 antialiased;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+  input[type='search']::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+  }
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  select {
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7580' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.25em 1.25em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ───────────── Printing ───────────── */
+#print-root {
+  display: none;
+}
+
+@media print {
+  @page {
+    margin: 12mm;
+  }
+  html,
+  body {
+    background: #fff !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-keep-bg {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  /* When a print job is queued, only the dedicated print document is printed. */
+  body.is-printing #root {
+    display: none !important;
+  }
+  body.is-printing #print-root {
+    display: block !important;
+  }
+  body.print-thermal #print-root .receipt-doc {
+    width: 72mm;
+    padding: 0;
+    margin: 0;
+  }
+  body.print-a4 #print-root .invoice-doc {
+    max-width: none;
+  }
+}
